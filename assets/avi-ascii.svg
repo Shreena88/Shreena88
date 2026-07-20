@@ -1,10 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570 644" width="570" height="644">
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;display=swap");
     .bg { fill: #0d1117; rx: 10px; ry: 10px; stroke: #30363d; stroke-width: 1.5; }
     .title-bar { fill: #161b22; rx: 10px; ry: 10px; }
-    .term-title { font-family: "Fira Code", monospace; font-size: 13px; fill: #8b949e; font-weight: 600; }
-    .ascii-text { font-family: "Fira Code", "Consolas", "Courier New", monospace; font-size: 8.5px; fill: #c9d1d9; xml:space: preserve; }
+    .term-title { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 13px; fill: #8b949e; font-weight: 600; }
+    .ascii-text { font-family: "Fira Code", "SFMono-Regular", "Consolas", "Courier New", monospace; font-size: 8.5px; fill: #c9d1d9; xml:space: preserve; }
   </style>
   <defs>
     <clipPath id="clip-row-0">

@@ -1,13 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 230" width="840" height="230">
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&amp;display=swap");
     .bg { fill: #0d1117; rx: 10px; ry: 10px; stroke: #30363d; stroke-width: 1.5; }
     .title-bar { fill: #161b22; rx: 10px; ry: 10px; }
-    .term-title { font-family: "Fira Code", monospace; font-size: 13px; fill: #8b949e; font-weight: 600; }
-    .lbl { font-family: "Fira Code", monospace; font-size: 10px; fill: #8b949e; }
-    .stat-title { font-family: "Fira Code", monospace; font-size: 11px; fill: #8b949e; font-weight: 600; }
-    .stat-val { font-family: "Fira Code", monospace; font-size: 12px; fill: #3fb950; font-weight: 700; }
-    .stat-sub { font-family: "Fira Code", monospace; font-size: 11px; fill: #c9d1d9; }
+    .term-title { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 13px; fill: #8b949e; font-weight: 600; }
+    .lbl { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 10px; fill: #8b949e; }
+    .stat-title { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 11px; fill: #8b949e; font-weight: 600; }
+    .stat-val { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 12px; fill: #3fb950; font-weight: 700; }
+    .stat-sub { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 11px; fill: #c9d1d9; }
   </style>
   <rect width="840" height="230" class="bg" />
   <rect width="840" height="38" class="title-bar" />

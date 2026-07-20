@@ -32,11 +32,10 @@ def generate_ascii_svg(txt_path, output_svg_path):
     svg_out = []
     svg_out.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">')
     svg_out.append('  <style>')
-    svg_out.append('    @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;display=swap");')
     svg_out.append('    .bg { fill: ' + bg_color + '; rx: 10px; ry: 10px; stroke: ' + border_color + '; stroke-width: 1.5; }')
     svg_out.append('    .title-bar { fill: ' + title_bar_bg + '; rx: 10px; ry: 10px; }')
-    svg_out.append('    .term-title { font-family: "Fira Code", monospace; font-size: 13px; fill: ' + sub_color + '; font-weight: 600; }')
-    svg_out.append('    .ascii-text { font-family: "Fira Code", "Consolas", "Courier New", monospace; font-size: 8.5px; fill: ' + text_color + '; xml:space: preserve; }')
+    svg_out.append('    .term-title { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 13px; fill: ' + sub_color + '; font-weight: 600; }')
+    svg_out.append('    .ascii-text { font-family: "Fira Code", "SFMono-Regular", "Consolas", "Courier New", monospace; font-size: 8.5px; fill: ' + text_color + '; xml:space: preserve; }')
     svg_out.append('  </style>')
     
     # Clip paths definitions for each row reveal

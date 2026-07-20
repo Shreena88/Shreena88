@@ -54,11 +54,10 @@ def generate_info_card_svg(output_path):
     svg_lines = []
     svg_lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">')
     svg_lines.append('  <style>')
-    svg_lines.append('    @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&amp;display=swap");')
     svg_lines.append('    .bg { fill: ' + bg_color + '; rx: 10px; ry: 10px; stroke: ' + border_color + '; stroke-width: 1.5; }')
     svg_lines.append('    .title-bar { fill: ' + title_bar_bg + '; rx: 10px; ry: 10px; }')
-    svg_lines.append('    .term-title { font-family: "Fira Code", monospace; font-size: 13px; fill: ' + sub_color + '; font-weight: 600; }')
-    svg_lines.append('    .txt { font-family: "Fira Code", "Consolas", monospace; font-size: 13px; }')
+    svg_lines.append('    .term-title { font-family: "Fira Code", "SFMono-Regular", "Consolas", "Courier New", monospace; font-size: 13px; fill: ' + sub_color + '; font-weight: 600; }')
+    svg_lines.append('    .txt { font-family: "Fira Code", "SFMono-Regular", "Consolas", "Courier New", monospace; font-size: 13px; }')
     svg_lines.append('    .p-user { fill: ' + prompt_color + '; font-weight: 700; }')
     svg_lines.append('    .p-host { fill: ' + key_color + '; font-weight: 700; }')
     svg_lines.append('    .key { fill: ' + key_color + '; font-weight: 600; }')
@@ -68,52 +67,55 @@ def generate_info_card_svg(output_path):
     svg_lines.append('    .proj-bullet { fill: ' + val_color + '; font-weight: 500; }')
     svg_lines.append('  </style>')
 
-    # Background & Title Bar
+    # Clip paths definitions for clean SMIL row reveals
+    svg_lines.append('  <defs>')
+    delay = 0.05
+    for i, item in enumerate(formatted_lines):
+        y_pos = start_y + i * line_height
+        delay_str = f"{delay:.2f}s"
+        svg_lines.append(f'    <clipPath id="ic-clip-{i}">')
+        svg_lines.append(f'      <rect x="20" y="{y_pos - 15}" width="0" height="24">')
+        svg_lines.append(f'        <animate attributeName="width" from="0" to="{width - 40}" begin="{delay_str}" dur="0.25s" fill="freeze" repeatCount="1" />')
+        svg_lines.append(f'      </rect>')
+        svg_lines.append(f'    </clipPath>')
+        delay += 0.03
+    svg_lines.append('  </defs>')
+
+    # Background & Window Chrome
     svg_lines.append(f'  <rect width="{width}" height="{height}" class="bg" />')
     svg_lines.append(f'  <rect width="{width}" height="38" class="title-bar" />')
     svg_lines.append(f'  <rect width="{width}" height="10" y="28" fill="{title_bar_bg}" />')
     
-    # Title bar buttons
+    # Title bar buttons & label
     svg_lines.append('  <circle cx="20" cy="19" r="6" fill="#ff5f56" />')
     svg_lines.append('  <circle cx="40" cy="19" r="6" fill="#ffbd2e" />')
     svg_lines.append('  <circle cx="60" cy="19" r="6" fill="#27c93f" />')
     svg_lines.append(f'  <text x="{width/2}" y="24" text-anchor="middle" class="term-title">shreena88@github: ~/neofetch</text>')
 
-    # Lines rendering with SMIL fade-in & slide-up animation
-    y_pos = start_y
-    delay = 0.05
-
-    for item in formatted_lines:
+    # Lines rendering with clip-path
+    for i, item in enumerate(formatted_lines):
         kind = item[0]
-        delay_str = f"{delay:.2f}s"
-
-        svg_lines.append('  <g>')
-        svg_lines.append(f'    <animate attributeName="opacity" values="0;1" begin="{delay_str}" dur="0.35s" fill="freeze" />')
-        svg_lines.append(f'    <animateTransform attributeName="transform" type="translate" values="0 8; 0 0" begin="{delay_str}" dur="0.35s" fill="freeze" />')
+        y_pos = start_y + i * line_height
 
         if kind == "prompt":
-            svg_lines.append(f'    <text x="25" y="{y_pos}" class="txt">')
-            svg_lines.append(f'      <tspan class="p-user">shreena88</tspan><tspan class="sub">@</tspan><tspan class="p-host">github</tspan><tspan class="val">:~$ neofetch</tspan>')
-            svg_lines.append(f'    </text>')
+            svg_lines.append(f'  <text x="25" y="{y_pos}" class="txt" clip-path="url(#ic-clip-{i})">')
+            svg_lines.append(f'    <tspan class="p-user">shreena88</tspan><tspan class="sub">@</tspan><tspan class="p-host">github</tspan><tspan class="val">:~$ neofetch</tspan>')
+            svg_lines.append(f'  </text>')
         elif kind == "divider":
-            svg_lines.append(f'    <text x="25" y="{y_pos}" class="txt sub">{item[1]}</text>')
+            svg_lines.append(f'  <text x="25" y="{y_pos}" class="txt sub" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
         elif kind == "key_val":
             k, v = item[1]
-            svg_lines.append(f'    <text x="25" y="{y_pos}" class="txt">')
-            svg_lines.append(f'      <tspan class="key">{k}</tspan><tspan class="val">{v}</tspan>')
-            svg_lines.append(f'    </text>')
+            svg_lines.append(f'  <text x="25" y="{y_pos}" class="txt" clip-path="url(#ic-clip-{i})">')
+            svg_lines.append(f'    <tspan class="key">{k}</tspan><tspan class="val">{v}</tspan>')
+            svg_lines.append(f'  </text>')
         elif kind == "key":
-            svg_lines.append(f'    <text x="25" y="{y_pos}" class="txt key">{item[1]}</text>')
+            svg_lines.append(f'  <text x="25" y="{y_pos}" class="txt key" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
         elif kind == "val":
-            svg_lines.append(f'    <text x="25" y="{y_pos}" class="txt val">{item[1]}</text>')
+            svg_lines.append(f'  <text x="25" y="{y_pos}" class="txt val" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
         elif kind == "header":
-            svg_lines.append(f'    <text x="25" y="{y_pos}" class="txt proj-head">{item[1]}</text>')
+            svg_lines.append(f'  <text x="25" y="{y_pos}" class="txt proj-head" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
         elif kind == "bullet":
-            svg_lines.append(f'    <text x="25" y="{y_pos}" class="txt proj-bullet">{item[1]}</text>')
-
-        svg_lines.append('  </g>')
-        y_pos += line_height
-        delay += 0.03
+            svg_lines.append(f'  <text x="25" y="{y_pos}" class="txt proj-bullet" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
 
     svg_lines.append('</svg>')
 

@@ -50,14 +50,13 @@ def render_heatmap_svg(json_path, output_svg_path):
     svg_lines = []
     svg_lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">')
     svg_lines.append('  <style>')
-    svg_lines.append('    @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&amp;display=swap");')
     svg_lines.append('    .bg { fill: ' + bg_color + '; rx: 10px; ry: 10px; stroke: ' + border_color + '; stroke-width: 1.5; }')
     svg_lines.append('    .title-bar { fill: ' + title_bar_bg + '; rx: 10px; ry: 10px; }')
-    svg_lines.append('    .term-title { font-family: "Fira Code", monospace; font-size: 13px; fill: ' + sub_color + '; font-weight: 600; }')
-    svg_lines.append('    .lbl { font-family: "Fira Code", monospace; font-size: 10px; fill: ' + sub_color + '; }')
-    svg_lines.append('    .stat-title { font-family: "Fira Code", monospace; font-size: 11px; fill: ' + sub_color + '; font-weight: 600; }')
-    svg_lines.append('    .stat-val { font-family: "Fira Code", monospace; font-size: 12px; fill: ' + accent_green + '; font-weight: 700; }')
-    svg_lines.append('    .stat-sub { font-family: "Fira Code", monospace; font-size: 11px; fill: ' + val_color + '; }')
+    svg_lines.append('    .term-title { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 13px; fill: ' + sub_color + '; font-weight: 600; }')
+    svg_lines.append('    .lbl { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 10px; fill: ' + sub_color + '; }')
+    svg_lines.append('    .stat-title { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 11px; fill: ' + sub_color + '; font-weight: 600; }')
+    svg_lines.append('    .stat-val { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 12px; fill: ' + accent_green + '; font-weight: 700; }')
+    svg_lines.append('    .stat-sub { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 11px; fill: ' + val_color + '; }')
     svg_lines.append('  </style>')
     
     # Background & Window Frame
