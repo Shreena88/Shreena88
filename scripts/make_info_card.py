@@ -27,9 +27,8 @@ def generate_info_card_svg(output_path):
     projects = [
         "Agentic workflow automation",
         "Medical Report Analyzer",
-        "Datasense-AI",
         "Briefly",
-        "Email Spam Detection"
+        "Datasense-AI"
     ]
 
     # Calculate layout dimensions

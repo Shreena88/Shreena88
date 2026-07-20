@@ -122,15 +122,15 @@
     <text x="25" y="565" class="txt proj-head">Projects</text>
   </g>
   <g class="animated-line" style="animation-delay: 1.09s;">
-    <text x="25" y="585" class="txt proj-bullet">• Voice AI Desktop Assistant</text>
+    <text x="25" y="585" class="txt proj-bullet">• Agentic workflow automation</text>
   </g>
   <g class="animated-line" style="animation-delay: 1.13s;">
     <text x="25" y="605" class="txt proj-bullet">• Medical Report Analyzer</text>
   </g>
   <g class="animated-line" style="animation-delay: 1.17s;">
-    <text x="25" y="625" class="txt proj-bullet">• Fake News Detection</text>
+    <text x="25" y="625" class="txt proj-bullet">• Briefly</text>
   </g>
   <g class="animated-line" style="animation-delay: 1.21s;">
-    <text x="25" y="645" class="txt proj-bullet">• Email Spam Detection</text>
+    <text x="25" y="645" class="txt proj-bullet">• Datasense-AI</text>
   </g>
 </svg>

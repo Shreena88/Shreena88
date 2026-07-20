@@ -33,10 +33,10 @@ shreena88@github:~$ tree projects/
 
 ```text
 projects/
-├── 🤖 Voice AI Desktop Assistant
+├── 🤖 Agentic workflow automation
 ├── 🏥 Medical Report Analyzer
-├── 📰 Fake News Detection
-└── 📧 Email Spam Detection
+├── 📰 Briefly
+└── 📧 Datasense-AI
 ```
 
 <br/>
