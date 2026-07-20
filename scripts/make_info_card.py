@@ -1,4 +1,5 @@
 import os
+import html
 
 def generate_info_card_svg(output_path):
     bg_color = "#0d1117"
@@ -60,7 +61,6 @@ def generate_info_card_svg(output_path):
     svg.append('    .txt { font-family: "Fira Code", "Consolas", monospace; font-size: 13px; }')
     svg.append('    .p-user { fill: ' + prompt_color + '; font-weight: 700; }')
     svg.append('    .p-host { fill: ' + key_color + '; font-weight: 700; }')
-    svg_lines_font_key = key_color
     svg.append('    .key { fill: ' + key_color + '; font-weight: 600; }')
     svg.append('    .val { fill: ' + val_color + '; }')
     svg.append('    .sub { fill: ' + sub_color + '; }')
@@ -93,6 +93,10 @@ def generate_info_card_svg(output_path):
     svg.append('  <circle cx="60" cy="19" r="6" fill="#27c93f" />')
     svg.append(f'  <text x="{width/2}" y="24" text-anchor="middle" class="term-title">shreena88@github: ~/neofetch</text>')
 
+    # Helper function to escape XML text
+    def esc(t):
+        return html.escape(str(t))
+
     # Lines rendering with clip-path
     for i, item in enumerate(formatted_lines):
         kind = item[0]
@@ -103,20 +107,20 @@ def generate_info_card_svg(output_path):
             svg.append(f'    <tspan class="p-user">shreena88</tspan><tspan class="sub">@</tspan><tspan class="p-host">github</tspan><tspan class="val">:~$ neofetch</tspan>')
             svg.append(f'  </text>')
         elif kind == "divider":
-            svg.append(f'  <text x="25" y="{y_pos}" class="txt sub" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
+            svg.append(f'  <text x="25" y="{y_pos}" class="txt sub" clip-path="url(#ic-clip-{i})">{esc(item[1])}</text>')
         elif kind == "key_val":
             k, v = item[1]
             svg.append(f'  <text x="25" y="{y_pos}" class="txt" clip-path="url(#ic-clip-{i})">')
-            svg.append(f'    <tspan class="key">{k}</tspan><tspan class="val">{v}</tspan>')
+            svg.append(f'    <tspan class="key">{esc(k)}</tspan><tspan class="val">{esc(v)}</tspan>')
             svg.append(f'  </text>')
         elif kind == "key":
-            svg.append(f'  <text x="25" y="{y_pos}" class="txt key" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
+            svg.append(f'  <text x="25" y="{y_pos}" class="txt key" clip-path="url(#ic-clip-{i})">{esc(item[1])}</text>')
         elif kind == "val":
-            svg.append(f'  <text x="25" y="{y_pos}" class="txt val" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
+            svg.append(f'  <text x="25" y="{y_pos}" class="txt val" clip-path="url(#ic-clip-{i})">{esc(item[1])}</text>')
         elif kind == "header":
-            svg.append(f'  <text x="25" y="{y_pos}" class="txt proj-head" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
+            svg.append(f'  <text x="25" y="{y_pos}" class="txt proj-head" clip-path="url(#ic-clip-{i})">{esc(item[1])}</text>')
         elif kind == "bullet":
-            svg.append(f'  <text x="25" y="{y_pos}" class="txt proj-bullet" clip-path="url(#ic-clip-{i})">{item[1]}</text>')
+            svg.append(f'  <text x="25" y="{y_pos}" class="txt proj-bullet" clip-path="url(#ic-clip-{i})">{esc(item[1])}</text>')
 
     svg.append('</svg>')
 
