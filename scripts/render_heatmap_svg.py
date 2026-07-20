@@ -8,19 +8,7 @@ def render_heatmap_svg(json_path, output_svg_path):
         data = json.load(f)
         
     days = data.get("days", [])
-    total_contribs = data.get("total_contributions", 0)
-    current_streak = data.get("current_streak", 0)
-    longest_streak = data.get("longest_streak", 0)
-    best_day = data.get("best_day", {"date": "N/A", "count": 0})
     
-    best_day_str = best_day["date"]
-    if best_day_str != "N/A":
-        try:
-            dt = datetime.strptime(best_day_str, "%Y-%m-%d")
-            best_day_str = dt.strftime("%b %d, %Y")
-        except ValueError:
-            pass
-            
     level_colors = [
         "#161b22",  # Level 0
         "#0e4429",  # Level 1
@@ -34,18 +22,16 @@ def render_heatmap_svg(json_path, output_svg_path):
     stride = cell_size + cell_gap
     
     start_x = 45
-    start_y = 75
+    start_y = 65
     
     num_weeks = (len(days) + 6) // 7
     width = max(start_x + num_weeks * stride + 40, 840)
-    height = 230
+    height = 200
     
     bg_color = "#0d1117"
     border_color = "#30363d"
     title_bar_bg = "#161b22"
     sub_color = "#8b949e"
-    val_color = "#c9d1d9"
-    accent_green = "#3fb950"
     
     svg_lines = []
     svg_lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">')
@@ -54,9 +40,6 @@ def render_heatmap_svg(json_path, output_svg_path):
     svg_lines.append('    .title-bar { fill: ' + title_bar_bg + '; rx: 10px; ry: 10px; }')
     svg_lines.append('    .term-title { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 13px; fill: ' + sub_color + '; font-weight: 600; }')
     svg_lines.append('    .lbl { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 10px; fill: ' + sub_color + '; }')
-    svg_lines.append('    .stat-title { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 11px; fill: ' + sub_color + '; font-weight: 600; }')
-    svg_lines.append('    .stat-val { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 12px; fill: ' + accent_green + '; font-weight: 700; }')
-    svg_lines.append('    .stat-sub { font-family: "Fira Code", "SFMono-Regular", "Consolas", monospace; font-size: 11px; fill: ' + val_color + '; }')
     svg_lines.append('  </style>')
     
     # Background & Window Frame
@@ -105,28 +88,12 @@ def render_heatmap_svg(json_path, output_svg_path):
 
     # Legend
     legend_x = start_x + num_weeks * stride - 120
-    legend_y = start_y + 7 * stride + 15
+    legend_y = start_y + 7 * stride + 12
     svg_lines.append(f'  <text x="{legend_x - 30}" y="{legend_y + 9}" class="lbl">Less</text>')
     for l_idx, l_col in enumerate(level_colors):
         lx = legend_x + l_idx * (cell_size + 3)
         svg_lines.append(f'  <rect x="{lx}" y="{legend_y}" width="{cell_size}" height="{cell_size}" fill="{l_col}" rx="2" ry="2"/>')
     svg_lines.append(f'  <text x="{legend_x + 5 * (cell_size + 3) + 5}" y="{legend_y + 9}" class="lbl">More</text>')
-
-    # Footer Statistics Bar
-    footer_y = height - 20
-    metrics = [
-        ("Total Yearly", f"{total_contribs} contribs"),
-        ("Current Streak", f"{current_streak} days"),
-        ("Longest Streak", f"{longest_streak} days"),
-        ("Best Day", f"{best_day['count']} on {best_day_str}")
-    ]
-    
-    col_width = (width - 60) // 4
-    for idx, (m_title, m_val) in enumerate(metrics):
-        cx = 30 + idx * col_width
-        svg_lines.append(f'  <text x="{cx}" y="{footer_y}" class="stat-sub">')
-        svg_lines.append(f'    <tspan class="stat-title">{m_title}: </tspan><tspan class="stat-val">{m_val}</tspan>')
-        svg_lines.append(f'  </text>')
 
     svg_lines.append('</svg>')
 
