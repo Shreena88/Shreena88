@@ -157,13 +157,11 @@
   <text x="25" y="145" class="txt" clip-path="url(#ic-clip-4)">
     <tspan class="key">Role:</tspan><tspan class="val"> AI &amp; Machine Learning Student</tspan>
   </text>
-  <text x="25" y="165" class="txt" clip-path="url(#ic-clip-5)">
-    <tspan class="key">Location:</tspan><tspan class="val"> India</tspan>
-  </text>
-  <text x="25" y="185" class="txt key" clip-path="url(#ic-clip-6)">Focus:</text>
-  <text x="25" y="205" class="txt val" clip-path="url(#ic-clip-7)">  Artificial Intelligence</text>
-  <text x="25" y="225" class="txt val" clip-path="url(#ic-clip-8)">  Computer Vision</text>
-  <text x="25" y="245" class="txt val" clip-path="url(#ic-clip-9)">  Natural Language Processing</text>
+  <text x="25" y="165" class="txt key" clip-path="url(#ic-clip-5)">Focus:</text>
+  <text x="25" y="185" class="txt val" clip-path="url(#ic-clip-6)">  Artificial Intelligence</text>
+  <text x="25" y="205" class="txt val" clip-path="url(#ic-clip-7)">  Computer Vision</text>
+  <text x="25" y="225" class="txt val" clip-path="url(#ic-clip-8)">  Natural Language Processing</text>
+  <text x="25" y="245" class="txt val" clip-path="url(#ic-clip-9)">  Machine Learning</text>
   <text x="25" y="265" class="txt key" clip-path="url(#ic-clip-10)">Backend:</text>
   <text x="25" y="285" class="txt val" clip-path="url(#ic-clip-11)">  FastAPI</text>
   <text x="25" y="305" class="txt val" clip-path="url(#ic-clip-12)">  Flask</text>

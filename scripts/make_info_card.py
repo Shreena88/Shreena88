@@ -14,7 +14,6 @@ def generate_info_card_svg(output_path):
         ("Username", "shreena88@github"),
         ("Education", "BSc Information Technology"),
         ("Role", "AI & Machine Learning Student"),
-        ("Location", "India"),
         ("Focus", ["Artificial Intelligence", "Computer Vision", "Natural Language Processing","Machine Learning"]),
         ("Backend", ["FastAPI", "Flask"]),
         ("Database", ["MongoDB", "MySQL"]),
