@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 690" width="540" height="690">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 590" width="540" height="590">
   <style>
     .bg { fill: #0d1117; rx: 10px; ry: 10px; stroke: #30363d; stroke-width: 1.5; }
     .title-bar { fill: #161b22; rx: 10px; ry: 10px; }
@@ -9,8 +9,6 @@
     .key { fill: #58a6ff; font-weight: 600; }
     .val { fill: #c9d1d9; }
     .sub { fill: #8b949e; }
-    .proj-head { fill: #3fb950; font-weight: 700; font-size: 14px; }
-    .proj-bullet { fill: #c9d1d9; font-weight: 500; }
   </style>
   <defs>
     <clipPath id="ic-clip-0">
@@ -138,33 +136,8 @@
         <animate attributeName="width" from="0" to="500" begin="0.77s" dur="0.25s" fill="freeze" repeatCount="1" />
       </rect>
     </clipPath>
-    <clipPath id="ic-clip-25">
-      <rect x="20" y="550" width="0" height="24">
-        <animate attributeName="width" from="0" to="500" begin="0.80s" dur="0.25s" fill="freeze" repeatCount="1" />
-      </rect>
-    </clipPath>
-    <clipPath id="ic-clip-26">
-      <rect x="20" y="570" width="0" height="24">
-        <animate attributeName="width" from="0" to="500" begin="0.83s" dur="0.25s" fill="freeze" repeatCount="1" />
-      </rect>
-    </clipPath>
-    <clipPath id="ic-clip-27">
-      <rect x="20" y="590" width="0" height="24">
-        <animate attributeName="width" from="0" to="500" begin="0.86s" dur="0.25s" fill="freeze" repeatCount="1" />
-      </rect>
-    </clipPath>
-    <clipPath id="ic-clip-28">
-      <rect x="20" y="610" width="0" height="24">
-        <animate attributeName="width" from="0" to="500" begin="0.89s" dur="0.25s" fill="freeze" repeatCount="1" />
-      </rect>
-    </clipPath>
-    <clipPath id="ic-clip-29">
-      <rect x="20" y="630" width="0" height="24">
-        <animate attributeName="width" from="0" to="500" begin="0.92s" dur="0.25s" fill="freeze" repeatCount="1" />
-      </rect>
-    </clipPath>
   </defs>
-  <rect width="540" height="690" class="bg" />
+  <rect width="540" height="590" class="bg" />
   <rect width="540" height="38" class="title-bar" />
   <rect width="540" height="10" y="28" fill="#161b22" />
   <circle cx="20" cy="19" r="6" fill="#ff5f56" />
@@ -206,9 +179,4 @@
   <text x="25" y="505" class="txt val" clip-path="url(#ic-clip-22)">  CSS</text>
   <text x="25" y="525" class="txt val" clip-path="url(#ic-clip-23)">  JavaScript</text>
   <text x="25" y="545" class="txt sub" clip-path="url(#ic-clip-24)">------------------------------------------</text>
-  <text x="25" y="565" class="txt proj-head" clip-path="url(#ic-clip-25)">Projects</text>
-  <text x="25" y="585" class="txt proj-bullet" clip-path="url(#ic-clip-26)">• Agentic workflow automation</text>
-  <text x="25" y="605" class="txt proj-bullet" clip-path="url(#ic-clip-27)">• Medical Report Analyzer</text>
-  <text x="25" y="625" class="txt proj-bullet" clip-path="url(#ic-clip-28)">• Briefly</text>
-  <text x="25" y="645" class="txt proj-bullet" clip-path="url(#ic-clip-29)">• Datasense-AI</text>
 </svg>

@@ -15,18 +15,11 @@ def generate_info_card_svg(output_path):
         ("Education", "BSc Information Technology"),
         ("Role", "AI & Machine Learning Student"),
         ("Location", "India"),
-        ("Focus", ["Artificial Intelligence", "Computer Vision", "Natural Language Processing"]),
+        ("Focus", ["Artificial Intelligence", "Computer Vision", "Natural Language Processing","Machine Learning"]),
         ("Backend", ["FastAPI", "Flask"]),
         ("Database", ["MongoDB", "MySQL"]),
         ("Languages", ["Python", "C++", "Java"]),
         ("Frontend", ["HTML", "CSS", "JavaScript"]),
-    ]
-
-    projects = [
-        "Agentic workflow automation",
-        "Medical Report Analyzer",
-        "Briefly",
-        "Datasense-AI"
     ]
 
     width = 540
@@ -43,14 +36,11 @@ def generate_info_card_svg(output_path):
             formatted_lines.append(("key_val", (f"{key}:", f" {val}")))
 
     formatted_lines.append(("divider", "------------------------------------------"))
-    formatted_lines.append(("header", "Projects"))
-    for proj in projects:
-        formatted_lines.append(("bullet", f"• {proj}"))
 
     line_height = 20
     start_y = 65
     content_height = start_y + len(formatted_lines) * line_height + 25
-    height = max(content_height, 680)
+    height = max(content_height, 580)
 
     svg = []
     svg.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">')
@@ -64,8 +54,6 @@ def generate_info_card_svg(output_path):
     svg.append('    .key { fill: ' + key_color + '; font-weight: 600; }')
     svg.append('    .val { fill: ' + val_color + '; }')
     svg.append('    .sub { fill: ' + sub_color + '; }')
-    svg.append('    .proj-head { fill: ' + prompt_color + '; font-weight: 700; font-size: 14px; }')
-    svg.append('    .proj-bullet { fill: ' + val_color + '; font-weight: 500; }')
     svg.append('  </style>')
 
     # Clip paths definitions for clean SMIL row reveals
@@ -117,10 +105,6 @@ def generate_info_card_svg(output_path):
             svg.append(f'  <text x="25" y="{y_pos}" class="txt key" clip-path="url(#ic-clip-{i})">{esc(item[1])}</text>')
         elif kind == "val":
             svg.append(f'  <text x="25" y="{y_pos}" class="txt val" clip-path="url(#ic-clip-{i})">{esc(item[1])}</text>')
-        elif kind == "header":
-            svg.append(f'  <text x="25" y="{y_pos}" class="txt proj-head" clip-path="url(#ic-clip-{i})">{esc(item[1])}</text>')
-        elif kind == "bullet":
-            svg.append(f'  <text x="25" y="{y_pos}" class="txt proj-bullet" clip-path="url(#ic-clip-{i})">{esc(item[1])}</text>')
 
     svg.append('</svg>')
 
