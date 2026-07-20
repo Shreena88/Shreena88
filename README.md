@@ -29,10 +29,10 @@ shreena88@github:~$ tree projects/
 
 ```text
 projects/
-├── 🤖 Agentic workflow automation
-├── 🏥 Medical Report Analyzer
-├── 📰 Briefly
-└── 📧 Datasense-AI
+🤖 Agentic workflow automation
+🏥 Medical Report Analyzer
+📰 Briefly
+📧 Datasense-AI
 ```
 
 <br/>
