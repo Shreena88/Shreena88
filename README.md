@@ -2,10 +2,6 @@
 
 # ⚡ `shreena88@github:~$`
 
-```bash
-shreena88@github:~$ ./contributions.sh
-```
-
 ![Contributions Heatmap](assets/contrib-heatmap.svg)
 
 <br/>
@@ -41,20 +37,5 @@ projects/
 
 <br/>
 
-```bash
-shreena88@github:~$ cat interests.txt
-```
-
-```text
-Artificial Intelligence
-
-Machine Learning
-
-Computer Vision
-
-Natural Language Processing
-
-Backend Development
-```
 
 </div>
