@@ -1,7 +1,6 @@
 import os
 
 def generate_info_card_svg(output_path):
-    # Standard terminal styling
     bg_color = "#0d1117"
     border_color = "#30363d"
     title_bar_bg = "#161b22"
@@ -9,9 +8,7 @@ def generate_info_card_svg(output_path):
     key_color = "#58a6ff"     # Blue accent for keys
     val_color = "#c9d1d9"     # Light gray/white text
     sub_color = "#8b949e"     # Subdued gray
-    accent_green = "#2ea043"
 
-    # Exact information specified in prompt:
     sections = [
         ("Username", "shreena88@github"),
         ("Education", "BSc Information Technology"),
@@ -31,13 +28,8 @@ def generate_info_card_svg(output_path):
         "Datasense-AI"
     ]
 
-    # Calculate layout dimensions
     width = 540
-    # Let's count total lines for vertical sizing
-    # Title bar + padding + items + projects
-    # Let's format lines
     formatted_lines = []
-    
     formatted_lines.append(("prompt", "shreena88@github:~$ neofetch"))
     formatted_lines.append(("divider", "-" * 42))
 
@@ -59,7 +51,6 @@ def generate_info_card_svg(output_path):
     content_height = start_y + len(formatted_lines) * line_height + 25
     height = max(content_height, 680)
 
-    # Build SVG content with SMIL and CSS animations
     svg_lines = []
     svg_lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">')
     svg_lines.append('  <style>')
@@ -75,25 +66,12 @@ def generate_info_card_svg(output_path):
     svg_lines.append('    .sub { fill: ' + sub_color + '; }')
     svg_lines.append('    .proj-head { fill: ' + prompt_color + '; font-weight: 700; font-size: 14px; }')
     svg_lines.append('    .proj-bullet { fill: ' + val_color + '; font-weight: 500; }')
-    svg_lines.append('    ')
-    svg_lines.append('    /* Staggered Line Animation */')
-    svg_lines.append('    .animated-line {')
-    svg_lines.append('      opacity: 0;')
-    svg_lines.append('      transform: translateY(12px);')
-    svg_lines.append('      animation: fadeInUp 0.4s ease-out forwards;')
-    svg_lines.append('    }')
-    svg_lines.append('    @keyframes fadeInUp {')
-    svg_lines.append('      to {')
-    svg_lines.append('        opacity: 1;')
-    svg_lines.append('        transform: translateY(0);')
-    svg_lines.append('      }')
-    svg_lines.append('    }')
     svg_lines.append('  </style>')
 
-    # Background & Window Chrome
+    # Background & Title Bar
     svg_lines.append(f'  <rect width="{width}" height="{height}" class="bg" />')
     svg_lines.append(f'  <rect width="{width}" height="38" class="title-bar" />')
-    svg_lines.append(f'  <rect width="{width}" height="10" y="28" fill="{title_bar_bg}" />') # clip bottom corners of titlebar
+    svg_lines.append(f'  <rect width="{width}" height="10" y="28" fill="{title_bar_bg}" />')
     
     # Title bar buttons
     svg_lines.append('  <circle cx="20" cy="19" r="6" fill="#ff5f56" />')
@@ -101,7 +79,7 @@ def generate_info_card_svg(output_path):
     svg_lines.append('  <circle cx="60" cy="19" r="6" fill="#27c93f" />')
     svg_lines.append(f'  <text x="{width/2}" y="24" text-anchor="middle" class="term-title">shreena88@github: ~/neofetch</text>')
 
-    # Lines rendering
+    # Lines rendering with SMIL fade-in & slide-up animation
     y_pos = start_y
     delay = 0.05
 
@@ -109,7 +87,9 @@ def generate_info_card_svg(output_path):
         kind = item[0]
         delay_str = f"{delay:.2f}s"
 
-        svg_lines.append(f'  <g class="animated-line" style="animation-delay: {delay_str};">')
+        svg_lines.append('  <g>')
+        svg_lines.append(f'    <animate attributeName="opacity" values="0;1" begin="{delay_str}" dur="0.35s" fill="freeze" />')
+        svg_lines.append(f'    <animateTransform attributeName="transform" type="translate" values="0 8; 0 0" begin="{delay_str}" dur="0.35s" fill="freeze" />')
 
         if kind == "prompt":
             svg_lines.append(f'    <text x="25" y="{y_pos}" class="txt">')
@@ -133,7 +113,7 @@ def generate_info_card_svg(output_path):
 
         svg_lines.append('  </g>')
         y_pos += line_height
-        delay += 0.04
+        delay += 0.03
 
     svg_lines.append('</svg>')
 

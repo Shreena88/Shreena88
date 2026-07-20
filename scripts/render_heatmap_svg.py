@@ -13,7 +13,6 @@ def render_heatmap_svg(json_path, output_svg_path):
     longest_streak = data.get("longest_streak", 0)
     best_day = data.get("best_day", {"date": "N/A", "count": 0})
     
-    # Format best day date nicely e.g. "2026-06-07" -> "Jun 7, 2026"
     best_day_str = best_day["date"]
     if best_day_str != "N/A":
         try:
@@ -22,7 +21,6 @@ def render_heatmap_svg(json_path, output_svg_path):
         except ValueError:
             pass
             
-    # GitHub Level Colors
     level_colors = [
         "#161b22",  # Level 0
         "#0e4429",  # Level 1
@@ -31,7 +29,6 @@ def render_heatmap_svg(json_path, output_svg_path):
         "#39d353"   # Level 4
     ]
     
-    # Dimensions & Layout
     cell_size = 11
     cell_gap = 3
     stride = cell_size + cell_gap
@@ -47,7 +44,6 @@ def render_heatmap_svg(json_path, output_svg_path):
     border_color = "#30363d"
     title_bar_bg = "#161b22"
     sub_color = "#8b949e"
-    key_color = "#58a6ff"
     val_color = "#c9d1d9"
     accent_green = "#3fb950"
     
@@ -62,23 +58,9 @@ def render_heatmap_svg(json_path, output_svg_path):
     svg_lines.append('    .stat-title { font-family: "Fira Code", monospace; font-size: 11px; fill: ' + sub_color + '; font-weight: 600; }')
     svg_lines.append('    .stat-val { font-family: "Fira Code", monospace; font-size: 12px; fill: ' + accent_green + '; font-weight: 700; }')
     svg_lines.append('    .stat-sub { font-family: "Fira Code", monospace; font-size: 11px; fill: ' + val_color + '; }')
-    svg_lines.append('    ')
-    svg_lines.append('    /* Diagonal Reveal Animation */')
-    svg_lines.append('    .day-box {')
-    svg_lines.append('      rx: 2.5px;')
-    svg_lines.append('      ry: 2.5px;')
-    svg_lines.append('      opacity: 0;')
-    svg_lines.append('      transform-origin: center;')
-    svg_lines.append('      animation: diagReveal 0.35s ease-out forwards;')
-    svg_lines.append('    }')
-    svg_lines.append('    @keyframes diagReveal {')
-    svg_lines.append('      0% { opacity: 0; transform: scale(0.2); }')
-    svg_lines.append('      70% { opacity: 0.9; transform: scale(1.1); }')
-    svg_lines.append('      100% { opacity: 1; transform: scale(1); }')
-    svg_lines.append('    }')
     svg_lines.append('  </style>')
     
-    # Background & Window Chrome
+    # Background & Window Frame
     svg_lines.append(f'  <rect width="{width}" height="{height}" class="bg" />')
     svg_lines.append(f'  <rect width="{width}" height="38" class="title-bar" />')
     svg_lines.append(f'  <rect width="{width}" height="10" y="28" fill="{title_bar_bg}" />')
@@ -89,7 +71,7 @@ def render_heatmap_svg(json_path, output_svg_path):
     svg_lines.append('  <circle cx="60" cy="19" r="6" fill="#27c93f" />')
     svg_lines.append(f'  <text x="{width/2}" y="24" text-anchor="middle" class="term-title">shreena88@github: ~/contributions.sh</text>')
 
-    # Day of week labels (Mon, Wed, Fri)
+    # Day of week labels
     day_labels = [("Mon", 1), ("Wed", 3), ("Fri", 5)]
     for lbl, r_idx in day_labels:
         y_pos = start_y + r_idx * stride + 9
@@ -103,7 +85,6 @@ def render_heatmap_svg(json_path, output_svg_path):
         col = i // 7
         row = i % 7
         
-        # Check month change
         dt = datetime.strptime(d["date"], "%Y-%m-%d")
         if dt.month != last_month and row == 0:
             m_name = month_names[dt.month - 1]
@@ -111,20 +92,19 @@ def render_heatmap_svg(json_path, output_svg_path):
             svg_lines.append(f'  <text x="{m_x}" y="{start_y - 8}" class="lbl">{m_name}</text>')
             last_month = dt.month
 
-        # Render cell square
         x = start_x + col * stride
         y = start_y + row * stride
         level = min(d.get("level", 0), 4)
         color = level_colors[level]
         
-        # Calculate diagonal animation delay based on col + row
-        delay = (col + row) * 0.015
+        delay = (col + row) * 0.012
         
-        svg_lines.append(f'  <rect x="{x}" y="{y}" width="{cell_size}" height="{cell_size}" fill="{color}" class="day-box" style="animation-delay: {delay:.3f}s;">')
+        svg_lines.append(f'  <rect x="{x}" y="{y}" width="{cell_size}" height="{cell_size}" fill="{color}" rx="2.5" ry="2.5">')
+        svg_lines.append(f'    <animate attributeName="opacity" values="0;1" begin="{delay:.3f}s" dur="0.25s" fill="freeze" />')
         svg_lines.append(f'    <title>{d["count"]} contributions on {d["date"]}</title>')
         svg_lines.append(f'  </rect>')
 
-    # Heatmap Legend (Less -> Level 0..4 -> More)
+    # Legend
     legend_x = start_x + num_weeks * stride - 120
     legend_y = start_y + 7 * stride + 15
     svg_lines.append(f'  <text x="{legend_x - 30}" y="{legend_y + 9}" class="lbl">Less</text>')
@@ -135,7 +115,6 @@ def render_heatmap_svg(json_path, output_svg_path):
 
     # Footer Statistics Bar
     footer_y = height - 20
-    # Equal distribution across 4 metric blocks
     metrics = [
         ("Total Yearly", f"{total_contribs} contribs"),
         ("Current Streak", f"{current_streak} days"),
