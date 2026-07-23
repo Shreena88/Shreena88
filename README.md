@@ -23,17 +23,6 @@ shreena88@github:~$ whoami
 
 <br/>
 
-```bash
-shreena88@github:~$ tree projects/
-```
-
-```text
-projects/
-🤖 Agentic workflow automation
-🏥 Medical Report Analyzer
-📰 Briefly
-📧 Datasense-AI
-```
 
 <br/>
 
